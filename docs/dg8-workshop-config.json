@@ -1,0 +1,82 @@
+{
+    "id": "dg8-workshop",
+    "name": "Red Hat Data Grid - From zero to hero",
+    "content": {
+      "url": "https://raw.githubusercontent.com/sshaaf/dg8-workshop.git/development"
+    },
+    "vars": {
+      "ROUTE_SUBDOMAIN": null,
+      "MASTER_URL": null,
+      "CONSOLE_URL": null,
+      "CHE_URL": null,
+      "KEYCLOAK_URL": null,
+      "GIT_URL": null,
+      "CHE_USER_NAME": null,
+      "CHE_USER_PASSWORD": null,
+      "OPENSHIFT_USER_NAME": null,
+      "OPENSHIFT_USER_PASSWORD": null,
+      "RHAMT_URL": null
+    },
+    "modules": [
+      {
+        "name": "Preface",
+        "module": "about"
+      },
+      {
+        "name": "Setting up",
+        "module": "settingup"
+      },
+      {
+        "name": "DataGrid in 10 mins",
+        "module": "dgin10mins"
+      },
+      {
+        "name": "Getting started with Data Grid",
+        "module": "exercises"
+      },
+      {
+        "name": "Kubernetes native Cache service",
+        "module": "installation"
+      },
+      {
+        "name": "Quarkus Remote Cache app",
+        "module": "remotecache"
+      },
+      {
+        "name": "SQL Caches stores for Databases",
+        "module": "sqlstore"
+      },
+      {
+        "name": "Monitoring and metrics",
+        "module": "monitoring"
+      },
+      {
+        "name": "Kubernetes native Cross site clusters",
+        "module": "crosssite"
+      },
+      {
+        "name": "Create Cache via Custom Resources",
+        "module": "createcache"
+      },
+      {
+        "name": "Cache via REST API",
+        "module": "restapi"
+      },
+      {
+        "name": "Externalizing Sessions",
+        "module": "sessionexternalization"
+      },
+      {
+        "name": "Setting up your own environment",
+        "module": "appendix"
+      },
+      {
+        "name": "You made it!",
+        "module": "conclusion"
+      },
+      {
+        "name": "References",
+        "module": "references"
+      }
+    ]
+  }

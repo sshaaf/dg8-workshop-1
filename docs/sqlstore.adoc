@@ -1,0 +1,125 @@
+= SQL Cache Stores with DG 8.3
+:experimental:
+
+SQL cache stores pre-load Infinispan caches from databases, with a supported dialect, through JDBC connections.
+SQL stores enable usecases where the cache needs to come directly from the SQL table stores i.e. databases. One does not need to write an application to load the cache in this case. 
+Datagrid will manage the cache by directly connecting to the database. There are two types of Stores
+
+    Table
+        Infinispan loads entries from a single database table.
+    Query
+        Infinispan uses SQL queries to load entries as well as perform insert, update, and delete operations.
+
+Both types helps users identify how they want to load the cache in to Red Hat Data Grid.
+
+<1> Allow read and write operations to persistent storage.
+<2> Can be read-only and act as a Cache Loader.
+<3> Support keys and values that correspond to a single database column or a composite of multiple database columns.
+<4> For composite keys and values, you must provide Infinispan with Protobuf schema (.proto files) that describe the keys and values. With Infinispan Server you can add schema through the Infinispan Console or Command Line Interface (CLI) with the schema command.
+
+=== Project details
+For this example we are going to create a simple web application. Retail Catalogue is a very simple Quarkus application that persists data in a Postgresql database. 
+
+'commands' endpoint displays the content of the database model.
+```json
+[
+    {
+        "id": 5,
+        "buyer": {
+            "id": 4,
+            "country": "Spain",
+            "email": "mfrechilla@quarkus.io",
+            "name": "Maria Rosario Frechilla",
+            "phone": "+34 666"
+        },
+    "products": [
+            {
+                "id": 1,
+                "code": "c123",
+                "name": "Skirt Party",
+                "price": 50,
+                "stock": 20
+            },
+            {
+                "id": 2,
+                "code": "c456",
+                "name": "Pants Party",
+                "price": 20,
+                "stock": 10
+            },
+            {
+                "id": 3,
+                "code": "c789",
+                "name": "Dress Party",
+                "price": 90,
+                "stock": 20
+            }
+            ],
+          "promotion": true
+        }
+]
+```
+
+Lets take a look at the backend database table structure.
+
+image::sqlstore_erd.png[SQL Store ERD, 800]
+
+<1> RETAILPRODUCT
+<2> CUSTOMER
+<3> CUSTOMERCOMMAND_RETAILPRODUCT
+<4> CUSTOMERCOMMAND
+
+=== Inmemory Catalogue
+
+Inmemory Catalogue creates two SQL Cache Stores with Infinispan on startup. 
+
+<1> `catalogue-table-store` is a table sql store persisted cache that maps to the RetailProduct table
+<2> `sold-products-query-store`is a query sql store persisted cache that joins information across multiple tables.
+
+Both caches use indexing.
+
+The application exposes 3 endpoints:
+
+<1> `catalogue`: Lists the catalogue content. Can filter by name, stock units and prices using query parameters.
+<2> `catalogue/{code}`: Displays the catalogue product by code
+<3>  `sales`: Lists the  products than have been sold. Filter can be done name of the product and country.
+
+
+Lets take a look at the Model
+
+image::sqlstore_classmodel.png[SQL Store Class model, 800]
+
+<1> RetailProduct
+<2> Customer
+<3> CustomerCommand
+<4> StockAvailable
+
+So let's get cracking. But first let's take a look at the project.
+
+Back in {{ CHE_URL }}[CodeReady Workspaces^], navigate to the project `dg8-sqlstore`. This is a template project, and you will be writing code into this project.
+As you can see there is already some files in place. Let's take a look into what these files are and do.
+
+
+
+=== Create the Data Grid instance
+
+
+=== Installing the database and tools
+
+
+=== Deploying our services
+
+
+=== Summary
+
+
+
+
+
+
+
+
+
+
+
+
